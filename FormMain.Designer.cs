@@ -29,7 +29,6 @@ namespace ThriftShop
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panelStart = new System.Windows.Forms.Panel();
             this.buttonEditAd = new System.Windows.Forms.Button();
             this.buttonAddAd = new System.Windows.Forms.Button();
@@ -56,7 +55,6 @@ namespace ThriftShop
             this.labelNewAccountUsername = new System.Windows.Forms.Label();
             this.textBoxNewUsername = new System.Windows.Forms.TextBox();
             this.labelCreateNewAccount = new System.Windows.Forms.Label();
-            this.imageListAddImage = new System.Windows.Forms.ImageList(this.components);
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelLogin.SuspendLayout();
@@ -358,12 +356,6 @@ namespace ThriftShop
             this.labelCreateNewAccount.Text = "Skapa nytt konto";
             this.labelCreateNewAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // imageListAddImage
-            // 
-            this.imageListAddImage.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imageListAddImage.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageListAddImage.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,7 +408,6 @@ namespace ThriftShop
         private System.Windows.Forms.Label labelCreateNewAccount;
         private System.Windows.Forms.Button buttonEditAd;
         private System.Windows.Forms.Button buttonAddAd;
-        private System.Windows.Forms.ImageList imageListAddImage;
     }
 }
 
