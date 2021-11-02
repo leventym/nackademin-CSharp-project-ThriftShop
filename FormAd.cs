@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ThriftShop
 {
-    public partial class FormLogin : Form
+    public partial class FormAd : Form
     {
-        public FormLogin()
+        public FormAd()
         {
             InitializeComponent();
         }

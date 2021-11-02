@@ -55,6 +55,8 @@ namespace ThriftShop
             this.labelNewAccountUsername = new System.Windows.Forms.Label();
             this.textBoxNewUsername = new System.Windows.Forms.TextBox();
             this.labelCreateNewAccount = new System.Windows.Forms.Label();
+            this.buttonLogout = new System.Windows.Forms.Button();
+            this.buttonBackCreateNewAccount = new System.Windows.Forms.Button();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelLogin.SuspendLayout();
@@ -67,6 +69,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelStart.Controls.Add(this.buttonLogout);
             this.panelStart.Controls.Add(this.buttonEditAd);
             this.panelStart.Controls.Add(this.buttonAddAd);
             this.panelStart.Controls.Add(this.dataGridView1);
@@ -74,7 +77,7 @@ namespace ThriftShop
             this.panelStart.Controls.Add(this.labelSearch);
             this.panelStart.Controls.Add(this.textBoxSearch);
             this.panelStart.Controls.Add(this.labelTitle);
-            this.panelStart.Location = new System.Drawing.Point(12, 12);
+            this.panelStart.Location = new System.Drawing.Point(0, 0);
             this.panelStart.Name = "panelStart";
             this.panelStart.Size = new System.Drawing.Size(868, 802);
             this.panelStart.TabIndex = 0;
@@ -170,7 +173,7 @@ namespace ThriftShop
             this.panelLogin.Controls.Add(this.labelUsername);
             this.panelLogin.Controls.Add(this.textBoxUserName);
             this.panelLogin.Controls.Add(this.label2);
-            this.panelLogin.Location = new System.Drawing.Point(12, 12);
+            this.panelLogin.Location = new System.Drawing.Point(0, 0);
             this.panelLogin.Name = "panelLogin";
             this.panelLogin.Size = new System.Drawing.Size(868, 802);
             this.panelLogin.TabIndex = 5;
@@ -263,6 +266,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCreateNewAccount.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelCreateNewAccount.Controls.Add(this.buttonBackCreateNewAccount);
             this.panelCreateNewAccount.Controls.Add(this.buttonCreateAccount);
             this.panelCreateNewAccount.Controls.Add(this.labelNewAccountEmail);
             this.panelCreateNewAccount.Controls.Add(this.textBoxNewEmail);
@@ -271,14 +275,14 @@ namespace ThriftShop
             this.panelCreateNewAccount.Controls.Add(this.labelNewAccountUsername);
             this.panelCreateNewAccount.Controls.Add(this.textBoxNewUsername);
             this.panelCreateNewAccount.Controls.Add(this.labelCreateNewAccount);
-            this.panelCreateNewAccount.Location = new System.Drawing.Point(12, 12);
+            this.panelCreateNewAccount.Location = new System.Drawing.Point(0, 0);
             this.panelCreateNewAccount.Name = "panelCreateNewAccount";
             this.panelCreateNewAccount.Size = new System.Drawing.Size(868, 802);
             this.panelCreateNewAccount.TabIndex = 9;
             // 
             // buttonCreateAccount
             // 
-            this.buttonCreateAccount.Location = new System.Drawing.Point(444, 206);
+            this.buttonCreateAccount.Location = new System.Drawing.Point(467, 209);
             this.buttonCreateAccount.Name = "buttonCreateAccount";
             this.buttonCreateAccount.Size = new System.Drawing.Size(100, 23);
             this.buttonCreateAccount.TabIndex = 8;
@@ -356,19 +360,41 @@ namespace ThriftShop
             this.labelCreateNewAccount.Text = "Skapa nytt konto";
             this.labelCreateNewAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // buttonLogout
+            // 
+            this.buttonLogout.Location = new System.Drawing.Point(720, 60);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogout.TabIndex = 7;
+            this.buttonLogout.Text = "Logga ut";
+            this.buttonLogout.UseVisualStyleBackColor = true;
+            this.buttonLogout.Visible = false;
+            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
+            // 
+            // buttonBackCreateNewAccount
+            // 
+            this.buttonBackCreateNewAccount.Location = new System.Drawing.Point(349, 209);
+            this.buttonBackCreateNewAccount.Name = "buttonBackCreateNewAccount";
+            this.buttonBackCreateNewAccount.Size = new System.Drawing.Size(100, 23);
+            this.buttonBackCreateNewAccount.TabIndex = 9;
+            this.buttonBackCreateNewAccount.Text = "Tillbaka";
+            this.buttonBackCreateNewAccount.UseVisualStyleBackColor = true;
+            this.buttonBackCreateNewAccount.Click += new System.EventHandler(this.buttonBackCreateNewAccount_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(892, 826);
+            this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.panelStart);
             this.Controls.Add(this.panelCreateNewAccount);
-            this.Controls.Add(this.panelLogin);
             this.Location = new System.Drawing.Point(12, 12);
             this.MinimumSize = new System.Drawing.Size(885, 865);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.panelStart.ResumeLayout(false);
             this.panelStart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -408,6 +434,8 @@ namespace ThriftShop
         private System.Windows.Forms.Label labelCreateNewAccount;
         private System.Windows.Forms.Button buttonEditAd;
         private System.Windows.Forms.Button buttonAddAd;
+        private System.Windows.Forms.Button buttonLogout;
+        private System.Windows.Forms.Button buttonBackCreateNewAccount;
     }
 }
 

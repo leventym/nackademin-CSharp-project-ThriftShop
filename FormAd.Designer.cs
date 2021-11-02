@@ -1,7 +1,7 @@
 ﻿
 namespace ThriftShop
 {
-    partial class FormLogin
+    partial class FormAd
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,18 @@ namespace ThriftShop
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FormAd
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormLogin";
+            this.ClientSize = new System.Drawing.Size(869, 826);
+            this.MinimumSize = new System.Drawing.Size(885, 865);
+            this.Name = "FormAd";
+            this.Text = "FormAd";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

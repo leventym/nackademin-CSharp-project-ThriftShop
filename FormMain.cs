@@ -11,9 +11,9 @@ namespace ThriftShop
         public string _sqlConnectinStr = ConfigurationManager.ConnectionStrings["ThriftShop.Properties.Settings.LeventsDBConnectionString"].ConnectionString; //Connection till Databasen
         SqlConnection conn; //Variabel för kopplingen
         FormLogin loginForm;
-        string currentUsername = "";
-        bool loggedIn = false;
-        
+        private string currentUsername = "";
+        private bool loggedIn = false;
+
 
         public FormMain()
         {
@@ -30,7 +30,7 @@ namespace ThriftShop
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
             panelStart.BringToFront();
 
@@ -69,7 +69,7 @@ namespace ThriftShop
         private void buttonLoginLogin_Click(object sender, EventArgs e)
         {
             bool loggedIn = User.loginToAccount(textBoxUserName.Text, textBoxPassword.Text, conn);
-            if(loggedIn == true)
+            if (loggedIn == true)
             {
                 MessageBox.Show("Inloggad!");
                 currentUsername = textBoxUserName.Text;
@@ -77,6 +77,7 @@ namespace ThriftShop
                 buttonLogin.Visible = false;
                 buttonAddAd.Visible = true;
                 buttonEditAd.Visible = true;
+                buttonLogout.Visible = true;
             }
         }
 
@@ -88,5 +89,23 @@ namespace ThriftShop
                 currentUsername = textBoxUserName.Text;
             }
         }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            buttonLogout.Visible = false;
+            buttonLogin.Visible = true;
+            buttonAddAd.Visible = false;
+            buttonEditAd.Visible = false;
+            loggedIn = false;
+            currentUsername = "";
+            panelStart.BringToFront();
+        }
+
+        private void buttonBackCreateNewAccount_Click(object sender, EventArgs e)
+        {
+            panelLogin.BringToFront();
+        }
+
+        
     }
 }
