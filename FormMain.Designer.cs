@@ -29,7 +29,9 @@ namespace ThriftShop
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelStart = new System.Windows.Forms.Panel();
+            this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonEditAd = new System.Windows.Forms.Button();
             this.buttonAddAd = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -47,6 +49,7 @@ namespace ThriftShop
             this.textBoxUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panelCreateNewAccount = new System.Windows.Forms.Panel();
+            this.buttonBackCreateNewAccount = new System.Windows.Forms.Button();
             this.buttonCreateAccount = new System.Windows.Forms.Button();
             this.labelNewAccountEmail = new System.Windows.Forms.Label();
             this.textBoxNewEmail = new System.Windows.Forms.TextBox();
@@ -55,12 +58,19 @@ namespace ThriftShop
             this.labelNewAccountUsername = new System.Windows.Forms.Label();
             this.textBoxNewUsername = new System.Windows.Forms.TextBox();
             this.labelCreateNewAccount = new System.Windows.Forms.Label();
-            this.buttonLogout = new System.Windows.Forms.Button();
-            this.buttonBackCreateNewAccount = new System.Windows.Forms.Button();
+            this.leventsDBDataSet = new ThriftShop.LeventsDBDataSet();
+            this.annonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.annonsTableAdapter = new ThriftShop.LeventsDBDataSetTableAdapters.AnnonsTableAdapter();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.titelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.beskrivningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prisDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelLogin.SuspendLayout();
             this.panelCreateNewAccount.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leventsDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelStart
@@ -79,13 +89,24 @@ namespace ThriftShop
             this.panelStart.Controls.Add(this.labelTitle);
             this.panelStart.Location = new System.Drawing.Point(0, 0);
             this.panelStart.Name = "panelStart";
-            this.panelStart.Size = new System.Drawing.Size(868, 802);
+            this.panelStart.Size = new System.Drawing.Size(845, 802);
             this.panelStart.TabIndex = 0;
+            // 
+            // buttonLogout
+            // 
+            this.buttonLogout.Location = new System.Drawing.Point(697, 60);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogout.TabIndex = 7;
+            this.buttonLogout.Text = "Logga ut";
+            this.buttonLogout.UseVisualStyleBackColor = true;
+            this.buttonLogout.Visible = false;
+            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // buttonEditAd
             // 
             this.buttonEditAd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEditAd.Location = new System.Drawing.Point(579, 765);
+            this.buttonEditAd.Location = new System.Drawing.Point(556, 765);
             this.buttonEditAd.Name = "buttonEditAd";
             this.buttonEditAd.Size = new System.Drawing.Size(105, 23);
             this.buttonEditAd.TabIndex = 6;
@@ -96,7 +117,7 @@ namespace ThriftShop
             // buttonAddAd
             // 
             this.buttonAddAd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAddAd.Location = new System.Drawing.Point(690, 765);
+            this.buttonAddAd.Location = new System.Drawing.Point(667, 765);
             this.buttonAddAd.Name = "buttonAddAd";
             this.buttonAddAd.Size = new System.Drawing.Size(105, 23);
             this.buttonAddAd.TabIndex = 5;
@@ -110,16 +131,28 @@ namespace ThriftShop
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Info;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.titelDataGridViewTextBoxColumn,
+            this.beskrivningDataGridViewTextBoxColumn,
+            this.prisDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.annonsBindingSource;
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView1.Location = new System.Drawing.Point(79, 89);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(716, 660);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(693, 660);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.TabStop = false;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonLogin
             // 
             this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(720, 60);
+            this.buttonLogin.Location = new System.Drawing.Point(697, 60);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 23);
             this.buttonLogin.TabIndex = 3;
@@ -143,7 +176,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSearch.Location = new System.Drawing.Point(121, 60);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(593, 20);
+            this.textBoxSearch.Size = new System.Drawing.Size(570, 20);
             this.textBoxSearch.TabIndex = 1;
             // 
             // labelTitle
@@ -154,7 +187,7 @@ namespace ThriftShop
             this.labelTitle.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelTitle.Location = new System.Drawing.Point(265, 12);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(313, 45);
+            this.labelTitle.Size = new System.Drawing.Size(290, 45);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Thrift Shop";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -175,13 +208,13 @@ namespace ThriftShop
             this.panelLogin.Controls.Add(this.label2);
             this.panelLogin.Location = new System.Drawing.Point(0, 0);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(868, 802);
+            this.panelLogin.Size = new System.Drawing.Size(845, 802);
             this.panelLogin.TabIndex = 5;
             // 
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Location = new System.Drawing.Point(492, 211);
+            this.buttonBack.Location = new System.Drawing.Point(469, 211);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 8;
@@ -201,7 +234,7 @@ namespace ThriftShop
             // buttonLoginLogin
             // 
             this.buttonLoginLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLoginLogin.Location = new System.Drawing.Point(492, 168);
+            this.buttonLoginLogin.Location = new System.Drawing.Point(469, 168);
             this.buttonLoginLogin.Name = "buttonLoginLogin";
             this.buttonLoginLogin.Size = new System.Drawing.Size(75, 23);
             this.buttonLoginLogin.TabIndex = 6;
@@ -225,7 +258,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPassword.Location = new System.Drawing.Point(271, 120);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(296, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(273, 20);
             this.textBoxPassword.TabIndex = 4;
             // 
             // labelUsername
@@ -244,7 +277,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxUserName.Location = new System.Drawing.Point(271, 81);
             this.textBoxUserName.Name = "textBoxUserName";
-            this.textBoxUserName.Size = new System.Drawing.Size(296, 20);
+            this.textBoxUserName.Size = new System.Drawing.Size(273, 20);
             this.textBoxUserName.TabIndex = 2;
             // 
             // label2
@@ -255,7 +288,7 @@ namespace ThriftShop
             this.label2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label2.Location = new System.Drawing.Point(265, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(313, 45);
+            this.label2.Size = new System.Drawing.Size(290, 45);
             this.label2.TabIndex = 0;
             this.label2.Text = "Logga in";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -277,8 +310,18 @@ namespace ThriftShop
             this.panelCreateNewAccount.Controls.Add(this.labelCreateNewAccount);
             this.panelCreateNewAccount.Location = new System.Drawing.Point(0, 0);
             this.panelCreateNewAccount.Name = "panelCreateNewAccount";
-            this.panelCreateNewAccount.Size = new System.Drawing.Size(868, 802);
+            this.panelCreateNewAccount.Size = new System.Drawing.Size(845, 802);
             this.panelCreateNewAccount.TabIndex = 9;
+            // 
+            // buttonBackCreateNewAccount
+            // 
+            this.buttonBackCreateNewAccount.Location = new System.Drawing.Point(349, 209);
+            this.buttonBackCreateNewAccount.Name = "buttonBackCreateNewAccount";
+            this.buttonBackCreateNewAccount.Size = new System.Drawing.Size(100, 23);
+            this.buttonBackCreateNewAccount.TabIndex = 9;
+            this.buttonBackCreateNewAccount.Text = "Tillbaka";
+            this.buttonBackCreateNewAccount.UseVisualStyleBackColor = true;
+            this.buttonBackCreateNewAccount.Click += new System.EventHandler(this.buttonBackCreateNewAccount_Click);
             // 
             // buttonCreateAccount
             // 
@@ -306,7 +349,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNewEmail.Location = new System.Drawing.Point(271, 158);
             this.textBoxNewEmail.Name = "textBoxNewEmail";
-            this.textBoxNewEmail.Size = new System.Drawing.Size(296, 20);
+            this.textBoxNewEmail.Size = new System.Drawing.Size(273, 20);
             this.textBoxNewEmail.TabIndex = 6;
             // 
             // labelNewAccountPassword
@@ -325,7 +368,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNewPassword.Location = new System.Drawing.Point(271, 120);
             this.textBoxNewPassword.Name = "textBoxNewPassword";
-            this.textBoxNewPassword.Size = new System.Drawing.Size(296, 20);
+            this.textBoxNewPassword.Size = new System.Drawing.Size(273, 20);
             this.textBoxNewPassword.TabIndex = 4;
             // 
             // labelNewAccountUsername
@@ -344,7 +387,7 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNewUsername.Location = new System.Drawing.Point(271, 81);
             this.textBoxNewUsername.Name = "textBoxNewUsername";
-            this.textBoxNewUsername.Size = new System.Drawing.Size(296, 20);
+            this.textBoxNewUsername.Size = new System.Drawing.Size(273, 20);
             this.textBoxNewUsername.TabIndex = 2;
             // 
             // labelCreateNewAccount
@@ -355,40 +398,61 @@ namespace ThriftShop
             this.labelCreateNewAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelCreateNewAccount.Location = new System.Drawing.Point(265, 12);
             this.labelCreateNewAccount.Name = "labelCreateNewAccount";
-            this.labelCreateNewAccount.Size = new System.Drawing.Size(313, 45);
+            this.labelCreateNewAccount.Size = new System.Drawing.Size(290, 45);
             this.labelCreateNewAccount.TabIndex = 0;
             this.labelCreateNewAccount.Text = "Skapa nytt konto";
             this.labelCreateNewAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // buttonLogout
+            // leventsDBDataSet
             // 
-            this.buttonLogout.Location = new System.Drawing.Point(720, 60);
-            this.buttonLogout.Name = "buttonLogout";
-            this.buttonLogout.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogout.TabIndex = 7;
-            this.buttonLogout.Text = "Logga ut";
-            this.buttonLogout.UseVisualStyleBackColor = true;
-            this.buttonLogout.Visible = false;
-            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
+            this.leventsDBDataSet.DataSetName = "LeventsDBDataSet";
+            this.leventsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // buttonBackCreateNewAccount
+            // annonsBindingSource
             // 
-            this.buttonBackCreateNewAccount.Location = new System.Drawing.Point(349, 209);
-            this.buttonBackCreateNewAccount.Name = "buttonBackCreateNewAccount";
-            this.buttonBackCreateNewAccount.Size = new System.Drawing.Size(100, 23);
-            this.buttonBackCreateNewAccount.TabIndex = 9;
-            this.buttonBackCreateNewAccount.Text = "Tillbaka";
-            this.buttonBackCreateNewAccount.UseVisualStyleBackColor = true;
-            this.buttonBackCreateNewAccount.Click += new System.EventHandler(this.buttonBackCreateNewAccount_Click);
+            this.annonsBindingSource.DataMember = "Annons";
+            this.annonsBindingSource.DataSource = this.leventsDBDataSet;
+            // 
+            // annonsTableAdapter
+            // 
+            this.annonsTableAdapter.ClearBeforeFill = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // titelDataGridViewTextBoxColumn
+            // 
+            this.titelDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.titelDataGridViewTextBoxColumn.DataPropertyName = "titel";
+            this.titelDataGridViewTextBoxColumn.HeaderText = "titel";
+            this.titelDataGridViewTextBoxColumn.Name = "titelDataGridViewTextBoxColumn";
+            // 
+            // beskrivningDataGridViewTextBoxColumn
+            // 
+            this.beskrivningDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.beskrivningDataGridViewTextBoxColumn.DataPropertyName = "beskrivning";
+            this.beskrivningDataGridViewTextBoxColumn.HeaderText = "beskrivning";
+            this.beskrivningDataGridViewTextBoxColumn.Name = "beskrivningDataGridViewTextBoxColumn";
+            // 
+            // prisDataGridViewTextBoxColumn
+            // 
+            this.prisDataGridViewTextBoxColumn.DataPropertyName = "pris";
+            this.prisDataGridViewTextBoxColumn.HeaderText = "pris";
+            this.prisDataGridViewTextBoxColumn.Name = "prisDataGridViewTextBoxColumn";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 826);
-            this.Controls.Add(this.panelLogin);
+            this.ClientSize = new System.Drawing.Size(869, 826);
             this.Controls.Add(this.panelStart);
             this.Controls.Add(this.panelCreateNewAccount);
+            this.Controls.Add(this.panelLogin);
             this.Location = new System.Drawing.Point(12, 12);
             this.MinimumSize = new System.Drawing.Size(885, 865);
             this.Name = "FormMain";
@@ -402,6 +466,8 @@ namespace ThriftShop
             this.panelLogin.PerformLayout();
             this.panelCreateNewAccount.ResumeLayout(false);
             this.panelCreateNewAccount.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leventsDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -436,6 +502,13 @@ namespace ThriftShop
         private System.Windows.Forms.Button buttonAddAd;
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.Button buttonBackCreateNewAccount;
+        private LeventsDBDataSet leventsDBDataSet;
+        private System.Windows.Forms.BindingSource annonsBindingSource;
+        private LeventsDBDataSetTableAdapters.AnnonsTableAdapter annonsTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn beskrivningDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prisDataGridViewTextBoxColumn;
     }
 }
 

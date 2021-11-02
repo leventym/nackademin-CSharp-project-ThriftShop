@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ThriftShop
 {
     class User
     {
+        public static int userID { get; set;}
+        
         //Metod för att skapa konto med antal kontroller.
         public static bool createAccount(string userName, string password, string email, SqlConnection conn)
         {
@@ -60,6 +58,7 @@ namespace ThriftShop
             }
 
 
+            //Skapar ny post med ny användare
             using (SqlCommand cmdInsert = new SqlCommand("INSERT INTO anvandare (anvandarnamn, losenord, email) VALUES ('" + userName + "','" + password + "','" + email + "')", conn))
             {
                 try
@@ -80,6 +79,7 @@ namespace ThriftShop
 
         }
 
+        //Loggar in till konto. Kollar om fälten är tomma, om inte hämtas användaren från db.
         public static bool loginToAccount(string userName, string password, SqlConnection conn)
         {
             if (userName == "" || password == "")
@@ -88,7 +88,7 @@ namespace ThriftShop
                 return false;
             }
 
-            using (SqlCommand cmdSelect = new SqlCommand("SELECT anvandarnamn FROM ANVANDARE where anvandarnamn='" + userName + "' AND losenord='" + password + "'", conn)) //Ange SQL kommando som ska skickas till db
+            using (SqlCommand cmdSelect = new SqlCommand("SELECT id,anvandarnamn FROM ANVANDARE where anvandarnamn='" + userName + "' AND losenord='" + password + "'", conn)) //Ange SQL kommando som ska skickas till db
             {
                 try
                 {
@@ -101,8 +101,11 @@ namespace ThriftShop
                     SqlDataAdapter adapter = new SqlDataAdapter(cmdSelect);
                     adapter.Fill(table);
 
+
+
                     if (table.Rows.Count == 1)
                     {
+                        userID = (int) table.Rows[0].ItemArray[0];
                         return true;
                     }
 

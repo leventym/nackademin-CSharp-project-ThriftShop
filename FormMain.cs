@@ -10,11 +10,11 @@ namespace ThriftShop
     {
         public string _sqlConnectinStr = ConfigurationManager.ConnectionStrings["ThriftShop.Properties.Settings.LeventsDBConnectionString"].ConnectionString; //Connection till Databasen
         SqlConnection conn; //Variabel för kopplingen
-        FormLogin loginForm;
-        private string currentUsername = "";
+        FormAd AdForm;
+        
+        private int userID = -1;
         private bool loggedIn = false;
-
-
+        
         public FormMain()
         {
             string userName = "1234anvandare1234";
@@ -25,37 +25,50 @@ namespace ThriftShop
 
             if (User.loginToAccount(userName, "losen123", conn))
             {
-                currentUsername = userName;
+ 
                 MessageBox.Show("Inloggning lyckades.");
             }
+
+            DatabaseMethods dm = new DatabaseMethods();
+            dataGridView1.DataSource = dm.getAllAds();
+
+
         }
 
+        //Placerar panelStart i förgrunden
         private void FormMain_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'leventsDBDataSet.Annons' table. You can move, or remove it, as needed.
+            this.annonsTableAdapter.Fill(this.leventsDBDataSet.Annons);
             panelStart.BringToFront();
 
         }
 
+        //Placerar panelLogin i förgrunden
         private void buttonLogin_Click_1(object sender, EventArgs e)
         {
             panelLogin.BringToFront();
         }
 
+        //Placerar panelStart i förgrunden
         private void buttonBack_Click(object sender, EventArgs e)
         {
             panelStart.BringToFront();
         }
 
+        //Placerar panelCreateNewAccount i förgrunden
         private void buttonNewAccount_Click(object sender, EventArgs e)
         {
             panelCreateNewAccount.BringToFront();
         }
 
+        //Placerar panelCreateNewAccount i förgrunden
         private void buttonNewAccount_Click_1(object sender, EventArgs e)
         {
             panelCreateNewAccount.BringToFront();
         }
 
+        //Kollar om användaren är inloggad & Placerar panelLogin i förgrunden
         private void buttonCreateAccount_Click(object sender, EventArgs e)
         {
             bool accountCreated = User.createAccount(textBoxNewUsername.Text, textBoxNewPassword.Text, textBoxNewEmail.Text, conn);
@@ -66,13 +79,14 @@ namespace ThriftShop
             }
         }
 
+        //Kollar om användaren är inloggad & Placerar panelLogin i förgrunden
+        //Visar och döljer knappar.
         private void buttonLoginLogin_Click(object sender, EventArgs e)
         {
-            bool loggedIn = User.loginToAccount(textBoxUserName.Text, textBoxPassword.Text, conn);
+            loggedIn = User.loginToAccount(textBoxUserName.Text, textBoxPassword.Text, conn);
             if (loggedIn == true)
             {
                 MessageBox.Show("Inloggad!");
-                currentUsername = textBoxUserName.Text;
                 panelStart.BringToFront();
                 buttonLogin.Visible = false;
                 buttonAddAd.Visible = true;
@@ -81,15 +95,18 @@ namespace ThriftShop
             }
         }
 
+        //Om inloggad och knappen skapa ny annons klockas initieras FormAd
         private void buttonAddAd_Click(object sender, EventArgs e)
         {
             if (loggedIn == true)
             {
-                MessageBox.Show("Inloggad!");
-                currentUsername = textBoxUserName.Text;
+                AdForm = new FormAd();
+                AdForm.Show();
             }
         }
 
+        //Om logga ut knappen klickas döljs och visas knappar och sttaus för inloggad blir false.
+        //Panelen panelStart placeras i förgrunden.
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             buttonLogout.Visible = false;
@@ -97,15 +114,19 @@ namespace ThriftShop
             buttonAddAd.Visible = false;
             buttonEditAd.Visible = false;
             loggedIn = false;
-            currentUsername = "";
+            User.userID = -1;
             panelStart.BringToFront();
         }
 
+        //Placerar panelLogin i förgrunden
         private void buttonBackCreateNewAccount_Click(object sender, EventArgs e)
         {
             panelLogin.BringToFront();
         }
 
-        
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }
