@@ -11,7 +11,9 @@ namespace ThriftShop
         public string _sqlConnectinStr = ConfigurationManager.ConnectionStrings["ThriftShop.Properties.Settings.LeventsDBConnectionString"].ConnectionString; //Connection till Databasen
         SqlConnection conn; //Variabel för kopplingen
         FormAd AdForm;
-        
+
+        DatabaseMethods dm;
+
         private int userID = -1;
         private bool loggedIn = false;
         
@@ -29,10 +31,15 @@ namespace ThriftShop
                 MessageBox.Show("Inloggning lyckades.");
             }
 
-            DatabaseMethods dm = new DatabaseMethods();
+            dm = new DatabaseMethods();
             dataGridView1.DataSource = dm.getAllAds();
 
 
+        }
+
+        public void refreshTable()
+        {
+            dataGridView1.DataSource = dm.getAllAds();
         }
 
         //Placerar panelStart i förgrunden
@@ -101,6 +108,7 @@ namespace ThriftShop
             if (loggedIn == true)
             {
                 AdForm = new FormAd();
+                AdForm.parent = this;
                 AdForm.Show();
             }
         }
@@ -124,9 +132,24 @@ namespace ThriftShop
             panelLogin.BringToFront();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void buttonEditAd_Click(object sender, EventArgs e)
         {
-            
+            // Kontrollera att användarnamnet på den som är inloggad matchar med annonsens användarnamn kolumn
+            DataGridViewRow row = dataGridView1.SelectedRows[0];
+            Ad editAd = new Ad() ;
+            editAd.adID =(int) row.Cells["id"].Value;
+            editAd.title = row.Cells["titel"].Value.ToString();
+            editAd.description = row.Cells["beskrivning"].Value.ToString();
+            editAd.price = (double) row.Cells["pris"].Value;
+            editAd.categoryName = row.Cells["namn"].Value.ToString();
+
+            AdForm = new FormAd();
+            AdForm.parent = this;
+            AdForm.EditAd(editAd);
+            AdForm.Show();
+
+
+
         }
     }
 }

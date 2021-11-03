@@ -8,7 +8,8 @@ namespace ThriftShop
     class User
     {
         public static int userID { get; set;}
-        
+        public static string userName { get; set; }
+
         //Metod för att skapa konto med antal kontroller.
         public static bool createAccount(string userName, string password, string email, SqlConnection conn)
         {

@@ -31,14 +31,16 @@ namespace ThriftShop
         {
             this.components = new System.ComponentModel.Container();
             this.panelStart = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonEditAd = new System.Windows.Forms.Button();
             this.buttonAddAd = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelSearch = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
+            this.annonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.leventsDBDataSet = new ThriftShop.LeventsDBDataSet();
             this.panelLogin = new System.Windows.Forms.Panel();
             this.buttonBack = new System.Windows.Forms.Button();
             this.buttonNewAccount = new System.Windows.Forms.Button();
@@ -58,19 +60,13 @@ namespace ThriftShop
             this.labelNewAccountUsername = new System.Windows.Forms.Label();
             this.textBoxNewUsername = new System.Windows.Forms.TextBox();
             this.labelCreateNewAccount = new System.Windows.Forms.Label();
-            this.leventsDBDataSet = new ThriftShop.LeventsDBDataSet();
-            this.annonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.annonsTableAdapter = new ThriftShop.LeventsDBDataSetTableAdapters.AnnonsTableAdapter();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.beskrivningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prisDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leventsDBDataSet)).BeginInit();
             this.panelLogin.SuspendLayout();
             this.panelCreateNewAccount.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leventsDBDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelStart
@@ -79,10 +75,10 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelStart.Controls.Add(this.dataGridView1);
             this.panelStart.Controls.Add(this.buttonLogout);
             this.panelStart.Controls.Add(this.buttonEditAd);
             this.panelStart.Controls.Add(this.buttonAddAd);
-            this.panelStart.Controls.Add(this.dataGridView1);
             this.panelStart.Controls.Add(this.buttonLogin);
             this.panelStart.Controls.Add(this.labelSearch);
             this.panelStart.Controls.Add(this.textBoxSearch);
@@ -91,6 +87,17 @@ namespace ThriftShop
             this.panelStart.Name = "panelStart";
             this.panelStart.Size = new System.Drawing.Size(845, 802);
             this.panelStart.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(121, 105);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(651, 654);
+            this.dataGridView1.TabIndex = 8;
             // 
             // buttonLogout
             // 
@@ -113,6 +120,7 @@ namespace ThriftShop
             this.buttonEditAd.Text = "Ändra annons";
             this.buttonEditAd.UseVisualStyleBackColor = true;
             this.buttonEditAd.Visible = false;
+            this.buttonEditAd.Click += new System.EventHandler(this.buttonEditAd_Click);
             // 
             // buttonAddAd
             // 
@@ -125,29 +133,6 @@ namespace ThriftShop
             this.buttonAddAd.UseVisualStyleBackColor = true;
             this.buttonAddAd.Visible = false;
             this.buttonAddAd.Click += new System.EventHandler(this.buttonAddAd_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Info;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.titelDataGridViewTextBoxColumn,
-            this.beskrivningDataGridViewTextBoxColumn,
-            this.prisDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.annonsBindingSource;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView1.Location = new System.Drawing.Point(79, 89);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(693, 660);
-            this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.TabStop = false;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonLogin
             // 
@@ -191,6 +176,16 @@ namespace ThriftShop
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Thrift Shop";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // annonsBindingSource
+            // 
+            this.annonsBindingSource.DataMember = "Annons";
+            this.annonsBindingSource.DataSource = this.leventsDBDataSet;
+            // 
+            // leventsDBDataSet
+            // 
+            this.leventsDBDataSet.DataSetName = "LeventsDBDataSet";
+            this.leventsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // panelLogin
             // 
@@ -403,47 +398,9 @@ namespace ThriftShop
             this.labelCreateNewAccount.Text = "Skapa nytt konto";
             this.labelCreateNewAccount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // leventsDBDataSet
-            // 
-            this.leventsDBDataSet.DataSetName = "LeventsDBDataSet";
-            this.leventsDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // annonsBindingSource
-            // 
-            this.annonsBindingSource.DataMember = "Annons";
-            this.annonsBindingSource.DataSource = this.leventsDBDataSet;
-            // 
             // annonsTableAdapter
             // 
             this.annonsTableAdapter.ClearBeforeFill = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // titelDataGridViewTextBoxColumn
-            // 
-            this.titelDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titelDataGridViewTextBoxColumn.DataPropertyName = "titel";
-            this.titelDataGridViewTextBoxColumn.HeaderText = "titel";
-            this.titelDataGridViewTextBoxColumn.Name = "titelDataGridViewTextBoxColumn";
-            // 
-            // beskrivningDataGridViewTextBoxColumn
-            // 
-            this.beskrivningDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.beskrivningDataGridViewTextBoxColumn.DataPropertyName = "beskrivning";
-            this.beskrivningDataGridViewTextBoxColumn.HeaderText = "beskrivning";
-            this.beskrivningDataGridViewTextBoxColumn.Name = "beskrivningDataGridViewTextBoxColumn";
-            // 
-            // prisDataGridViewTextBoxColumn
-            // 
-            this.prisDataGridViewTextBoxColumn.DataPropertyName = "pris";
-            this.prisDataGridViewTextBoxColumn.HeaderText = "pris";
-            this.prisDataGridViewTextBoxColumn.Name = "prisDataGridViewTextBoxColumn";
             // 
             // FormMain
             // 
@@ -462,12 +419,12 @@ namespace ThriftShop
             this.panelStart.ResumeLayout(false);
             this.panelStart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leventsDBDataSet)).EndInit();
             this.panelLogin.ResumeLayout(false);
             this.panelLogin.PerformLayout();
             this.panelCreateNewAccount.ResumeLayout(false);
             this.panelCreateNewAccount.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leventsDBDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -479,7 +436,6 @@ namespace ThriftShop
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.TextBox textBoxSearch;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panelLogin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonBack;
@@ -505,10 +461,7 @@ namespace ThriftShop
         private LeventsDBDataSet leventsDBDataSet;
         private System.Windows.Forms.BindingSource annonsBindingSource;
         private LeventsDBDataSetTableAdapters.AnnonsTableAdapter annonsTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn beskrivningDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn prisDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
