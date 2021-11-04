@@ -13,27 +13,19 @@ namespace ThriftShop
         FormAd AdForm;
 
         DatabaseMethods dm;
+        DataTable dt;
 
-        private int userID = -1;
         private bool loggedIn = false;
         
         public FormMain()
         {
-            string userName = "1234anvandare1234";
+            
             conn = new SqlConnection(_sqlConnectinStr); //Initera kopplingen med angivna connectionsträngen
             InitializeComponent();
-            //string result = User.createAccount(userName, "losen123", "test@test.se", conn);
-            //MessageBox.Show(result);
-
-            if (User.loginToAccount(userName, "losen123", conn))
-            {
- 
-                MessageBox.Show("Inloggning lyckades.");
-            }
 
             dm = new DatabaseMethods();
-            dataGridView1.DataSource = dm.getAllAds();
-
+            this.dt = dm.getAllAds();
+            dataGridView1.DataSource = this.dt;
 
         }
 
@@ -48,6 +40,9 @@ namespace ThriftShop
             // TODO: This line of code loads data into the 'leventsDBDataSet.Annons' table. You can move, or remove it, as needed.
             this.annonsTableAdapter.Fill(this.leventsDBDataSet.Annons);
             panelStart.BringToFront();
+            this.dataGridView1.Columns["id"].Visible = false;
+
+           
 
         }
 
@@ -124,6 +119,8 @@ namespace ThriftShop
             loggedIn = false;
             User.userID = -1;
             panelStart.BringToFront();
+            textBoxUserName.Text = "";
+            textBoxPassword.Text = "";
         }
 
         //Placerar panelLogin i förgrunden
@@ -132,23 +129,37 @@ namespace ThriftShop
             panelLogin.BringToFront();
         }
 
+        //Metod för att redigera annons. Bara inloggad användare kan rediegra sin annons. Medan man redigerar kan man även radera.
         private void buttonEditAd_Click(object sender, EventArgs e)
         {
             // Kontrollera att användarnamnet på den som är inloggad matchar med annonsens användarnamn kolumn
             DataGridViewRow row = dataGridView1.SelectedRows[0];
             Ad editAd = new Ad() ;
-            editAd.adID =(int) row.Cells["id"].Value;
-            editAd.title = row.Cells["titel"].Value.ToString();
-            editAd.description = row.Cells["beskrivning"].Value.ToString();
-            editAd.price = (double) row.Cells["pris"].Value;
-            editAd.categoryName = row.Cells["namn"].Value.ToString();
+            string annonsSkapare = row.Cells["Säljare"].Value.ToString();
+            if(annonsSkapare == User.userName)
+            {
+                editAd.adID = (int)row.Cells["id"].Value;
+                editAd.title = row.Cells["titel"].Value.ToString();
+                editAd.description = row.Cells["beskrivning"].Value.ToString();
+                editAd.price = (double)row.Cells["pris"].Value;
+                editAd.categoryName = row.Cells["namn"].Value.ToString();
 
-            AdForm = new FormAd();
-            AdForm.parent = this;
-            AdForm.EditAd(editAd);
-            AdForm.Show();
+                AdForm = new FormAd();
+                AdForm.parent = this;
+                AdForm.EditAd(editAd);
+                AdForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Du har inte behörighet att redigera denna annons.");
+            }
+        }
 
-
+        private void textBoxSearchTitle_TextChanged(object sender, EventArgs e)
+        {
+            string filterField = "Titel";
+            dataGridView1.DataSource = filterField;
+            dt.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "Titel", "000");
 
         }
     }

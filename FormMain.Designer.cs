@@ -36,8 +36,8 @@ namespace ThriftShop
             this.buttonEditAd = new System.Windows.Forms.Button();
             this.buttonAddAd = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelSearch = new System.Windows.Forms.Label();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.labelSearchTitle = new System.Windows.Forms.Label();
+            this.textBoxSearchTitle = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.annonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.leventsDBDataSet = new ThriftShop.LeventsDBDataSet();
@@ -61,6 +61,8 @@ namespace ThriftShop
             this.textBoxNewUsername = new System.Windows.Forms.TextBox();
             this.labelCreateNewAccount = new System.Windows.Forms.Label();
             this.annonsTableAdapter = new ThriftShop.LeventsDBDataSetTableAdapters.AnnonsTableAdapter();
+            this.labelSearchCategory = new System.Windows.Forms.Label();
+            this.textBoxSearchCategory = new System.Windows.Forms.TextBox();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).BeginInit();
@@ -75,13 +77,15 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelStart.Controls.Add(this.labelSearchCategory);
+            this.panelStart.Controls.Add(this.textBoxSearchCategory);
             this.panelStart.Controls.Add(this.dataGridView1);
             this.panelStart.Controls.Add(this.buttonLogout);
             this.panelStart.Controls.Add(this.buttonEditAd);
             this.panelStart.Controls.Add(this.buttonAddAd);
             this.panelStart.Controls.Add(this.buttonLogin);
-            this.panelStart.Controls.Add(this.labelSearch);
-            this.panelStart.Controls.Add(this.textBoxSearch);
+            this.panelStart.Controls.Add(this.labelSearchTitle);
+            this.panelStart.Controls.Add(this.textBoxSearchTitle);
             this.panelStart.Controls.Add(this.labelTitle);
             this.panelStart.Location = new System.Drawing.Point(0, 0);
             this.panelStart.Name = "panelStart";
@@ -90,6 +94,8 @@ namespace ThriftShop
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(121, 105);
             this.dataGridView1.MultiSelect = false;
@@ -145,24 +151,25 @@ namespace ThriftShop
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click_1);
             // 
-            // labelSearch
+            // labelSearchTitle
             // 
-            this.labelSearch.AutoSize = true;
-            this.labelSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearch.Location = new System.Drawing.Point(75, 58);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(41, 20);
-            this.labelSearch.TabIndex = 2;
-            this.labelSearch.Text = "Sök:";
+            this.labelSearchTitle.AutoSize = true;
+            this.labelSearchTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchTitle.Location = new System.Drawing.Point(45, 58);
+            this.labelSearchTitle.Name = "labelSearchTitle";
+            this.labelSearchTitle.Size = new System.Drawing.Size(70, 20);
+            this.labelSearchTitle.TabIndex = 2;
+            this.labelSearchTitle.Text = "Sök titel:";
             // 
-            // textBoxSearch
+            // textBoxSearchTitle
             // 
-            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxSearchTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSearch.Location = new System.Drawing.Point(121, 60);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(570, 20);
-            this.textBoxSearch.TabIndex = 1;
+            this.textBoxSearchTitle.Location = new System.Drawing.Point(121, 60);
+            this.textBoxSearchTitle.Name = "textBoxSearchTitle";
+            this.textBoxSearchTitle.Size = new System.Drawing.Size(211, 20);
+            this.textBoxSearchTitle.TabIndex = 1;
+            this.textBoxSearchTitle.TextChanged += new System.EventHandler(this.textBoxSearchTitle_TextChanged);
             // 
             // labelTitle
             // 
@@ -402,6 +409,25 @@ namespace ThriftShop
             // 
             this.annonsTableAdapter.ClearBeforeFill = true;
             // 
+            // labelSearchCategory
+            // 
+            this.labelSearchCategory.AutoSize = true;
+            this.labelSearchCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchCategory.Location = new System.Drawing.Point(345, 58);
+            this.labelSearchCategory.Name = "labelSearchCategory";
+            this.labelSearchCategory.Size = new System.Drawing.Size(98, 20);
+            this.labelSearchCategory.TabIndex = 10;
+            this.labelSearchCategory.Text = "Sök kategori";
+            // 
+            // textBoxSearchCategory
+            // 
+            this.textBoxSearchCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSearchCategory.Location = new System.Drawing.Point(450, 60);
+            this.textBoxSearchCategory.Name = "textBoxSearchCategory";
+            this.textBoxSearchCategory.Size = new System.Drawing.Size(211, 20);
+            this.textBoxSearchCategory.TabIndex = 9;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,8 +460,8 @@ namespace ThriftShop
         private System.Windows.Forms.Panel panelStart;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.Label labelSearch;
-        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Label labelSearchTitle;
+        private System.Windows.Forms.TextBox textBoxSearchTitle;
         private System.Windows.Forms.Panel panelLogin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonBack;
@@ -462,6 +488,8 @@ namespace ThriftShop
         private System.Windows.Forms.BindingSource annonsBindingSource;
         private LeventsDBDataSetTableAdapters.AnnonsTableAdapter annonsTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label labelSearchCategory;
+        private System.Windows.Forms.TextBox textBoxSearchCategory;
     }
 }
 

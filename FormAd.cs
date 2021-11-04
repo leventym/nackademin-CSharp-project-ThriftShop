@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ThriftShop
@@ -16,7 +9,7 @@ namespace ThriftShop
         public FormMain parent { set; get; }
         public int adId{ set; get; }
 
-    private DatabaseMethods db = new DatabaseMethods();
+        private DatabaseMethods db = new DatabaseMethods();
         public FormAd()
         {
             InitializeComponent();
@@ -25,6 +18,7 @@ namespace ThriftShop
             // Lägg in result in combobox
             comboBoxCategory.DataSource = result;
             comboBoxCategoryEdit.DataSource = result;
+            panelNewAd.BringToFront();
         }
 
         //Funktion för att redigera eller radera annons
@@ -36,6 +30,13 @@ namespace ThriftShop
             textBoxPriceEdit.Text = ad.price.ToString();
             comboBoxCategoryEdit.SelectedItem = ad.categoryName;
             this.adId = ad.adID;
+        }
+
+        private void buttonDeleteEdit_Click(object sender, EventArgs e)
+        {
+            this.db.deleteAd(adId);
+            parent.refreshTable();
+            this.Close();
         }
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -53,12 +54,10 @@ namespace ThriftShop
             {
                 newAd.price = double.Parse(textBoxPrice.Text);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 newAd.price = 0; 
             }
-            
-
 
             if(newAd.isValid())
             {
@@ -97,12 +96,10 @@ namespace ThriftShop
             {
                 editAd.price = double.Parse(textBoxPriceEdit.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 editAd.price = 0;
             }
-
-
 
             if (editAd.isValid())
             {
@@ -117,5 +114,6 @@ namespace ThriftShop
                 labelErrorMessage.Visible = true;
             }
         }
+
     }
 }

@@ -80,6 +80,7 @@ namespace ThriftShop
 
         }
 
+        
         //Loggar in till konto. Kollar om fälten är tomma, om inte hämtas användaren från db.
         public static bool loginToAccount(string userName, string password, SqlConnection conn)
         {
@@ -107,6 +108,7 @@ namespace ThriftShop
                     if (table.Rows.Count == 1)
                     {
                         userID = (int) table.Rows[0].ItemArray[0];
+                        User.userName = userName;
                         return true;
                     }
 
@@ -119,5 +121,7 @@ namespace ThriftShop
                 return false;
             }
         }
+
+
     }
 }

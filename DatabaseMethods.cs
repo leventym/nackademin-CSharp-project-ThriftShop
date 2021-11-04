@@ -68,7 +68,9 @@ namespace ThriftShop
                     {
                         conn.Open();
                     }
-                    cmdInsert.ExecuteNonQuery();
+                    int value = cmdInsert.ExecuteNonQuery();
+                    MessageBox.Show(value.ToString());
+
                 }
                 catch (Exception e)
                 {
@@ -81,7 +83,7 @@ namespace ThriftShop
         {
             DataTable table = new DataTable();
             // Använd select för att hämta alla annonser (alla kolumner)
-            using (SqlCommand cmdSelect = new SqlCommand("SELECT Annons.id, titel, beskrivning, pris, Kategori.namn, Anvandare.anvandarnamn " +
+            using (SqlCommand cmdSelect = new SqlCommand("SELECT Annons.id, titel AS Titel, beskrivning AS Beskrivning, pris AS Pris, Kategori.namn AS Kategori, Annons.Datum AS Datum, Anvandare.anvandarnamn AS Säljare " +
                                                             "FROM Annons " +
                                                             "INNER JOIN Kategori " +
                                                             "ON Annons.KategoriID = Kategori.id " +
@@ -98,6 +100,7 @@ namespace ThriftShop
                     
                     SqlDataAdapter adapter = new SqlDataAdapter(cmdSelect);
                     adapter.Fill(table);
+                    
 
                     /*
                     foreach (DataRow row in table.Rows)
@@ -122,7 +125,6 @@ namespace ThriftShop
         public void updateAd(Ad newAd)
         {
             
-            
             using (SqlCommand cmdInsert = new SqlCommand("UPDATE Annons " +
                                                          "SET titel = '" + newAd.title + "'" +
                                                          ", beskrivning = '" + newAd.description + "'" +
@@ -146,6 +148,21 @@ namespace ThriftShop
             }
         }
 
-
+        //Metod för att radera annons med Entity Framework
+        public void deleteAd(int annonsID)
+        {
+            
+            try
+            {
+                LeventsDBEntities annonsContext = new LeventsDBEntities();
+                annonsContext.DeleteAnnons(annonsID);
+                annonsContext.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
     }
 }

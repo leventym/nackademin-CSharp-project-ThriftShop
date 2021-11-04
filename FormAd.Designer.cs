@@ -41,7 +41,10 @@ namespace ThriftShop
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelErrorMessage = new System.Windows.Forms.Label();
             this.panelNewAd = new System.Windows.Forms.Panel();
+            this.labelTitel = new System.Windows.Forms.Label();
             this.panelEditAd = new System.Windows.Forms.Panel();
+            this.labelTitleEdit = new System.Windows.Forms.Label();
+            this.buttonDeleteEdit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxTitleEdit = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,9 +56,6 @@ namespace ThriftShop
             this.labelCategoryEdit = new System.Windows.Forms.Label();
             this.comboBoxCategoryEdit = new System.Windows.Forms.ComboBox();
             this.labelPriceEdit = new System.Windows.Forms.Label();
-            this.buttonDeleteEdit = new System.Windows.Forms.Button();
-            this.labelTitel = new System.Windows.Forms.Label();
-            this.labelTitleEdit = new System.Windows.Forms.Label();
             this.panelNewAd.SuspendLayout();
             this.panelEditAd.SuspendLayout();
             this.SuspendLayout();
@@ -175,6 +175,15 @@ namespace ThriftShop
             this.panelNewAd.Size = new System.Drawing.Size(847, 785);
             this.panelNewAd.TabIndex = 14;
             // 
+            // labelTitel
+            // 
+            this.labelTitel.AutoSize = true;
+            this.labelTitel.Location = new System.Drawing.Point(118, 46);
+            this.labelTitel.Name = "labelTitel";
+            this.labelTitel.Size = new System.Drawing.Size(27, 13);
+            this.labelTitel.TabIndex = 13;
+            this.labelTitel.Text = "Titel";
+            // 
             // panelEditAd
             // 
             this.panelEditAd.Controls.Add(this.labelTitleEdit);
@@ -194,6 +203,25 @@ namespace ThriftShop
             this.panelEditAd.Name = "panelEditAd";
             this.panelEditAd.Size = new System.Drawing.Size(847, 785);
             this.panelEditAd.TabIndex = 15;
+            // 
+            // labelTitleEdit
+            // 
+            this.labelTitleEdit.AutoSize = true;
+            this.labelTitleEdit.Location = new System.Drawing.Point(118, 46);
+            this.labelTitleEdit.Name = "labelTitleEdit";
+            this.labelTitleEdit.Size = new System.Drawing.Size(27, 13);
+            this.labelTitleEdit.TabIndex = 14;
+            this.labelTitleEdit.Text = "Titel";
+            // 
+            // buttonDeleteEdit
+            // 
+            this.buttonDeleteEdit.Location = new System.Drawing.Point(397, 507);
+            this.buttonDeleteEdit.Name = "buttonDeleteEdit";
+            this.buttonDeleteEdit.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteEdit.TabIndex = 13;
+            this.buttonDeleteEdit.Text = "Ta bort";
+            this.buttonDeleteEdit.UseVisualStyleBackColor = true;
+            this.buttonDeleteEdit.Click += new System.EventHandler(this.buttonDeleteEdit_Click);
             // 
             // label2
             // 
@@ -290,33 +318,6 @@ namespace ThriftShop
             this.labelPriceEdit.Size = new System.Drawing.Size(24, 13);
             this.labelPriceEdit.TabIndex = 8;
             this.labelPriceEdit.Text = "Pris";
-            // 
-            // buttonDeleteEdit
-            // 
-            this.buttonDeleteEdit.Location = new System.Drawing.Point(397, 507);
-            this.buttonDeleteEdit.Name = "buttonDeleteEdit";
-            this.buttonDeleteEdit.Size = new System.Drawing.Size(75, 23);
-            this.buttonDeleteEdit.TabIndex = 13;
-            this.buttonDeleteEdit.Text = "Ta bort";
-            this.buttonDeleteEdit.UseVisualStyleBackColor = true;
-            // 
-            // labelTitel
-            // 
-            this.labelTitel.AutoSize = true;
-            this.labelTitel.Location = new System.Drawing.Point(118, 46);
-            this.labelTitel.Name = "labelTitel";
-            this.labelTitel.Size = new System.Drawing.Size(27, 13);
-            this.labelTitel.TabIndex = 13;
-            this.labelTitel.Text = "Titel";
-            // 
-            // labelTitleEdit
-            // 
-            this.labelTitleEdit.AutoSize = true;
-            this.labelTitleEdit.Location = new System.Drawing.Point(118, 46);
-            this.labelTitleEdit.Name = "labelTitleEdit";
-            this.labelTitleEdit.Size = new System.Drawing.Size(27, 13);
-            this.labelTitleEdit.TabIndex = 14;
-            this.labelTitleEdit.Text = "Titel";
             // 
             // FormAd
             // 

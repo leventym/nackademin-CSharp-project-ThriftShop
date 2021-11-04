@@ -375,6 +375,8 @@ namespace ThriftShop {
             
             private global::System.Data.DataColumn columnanvandareID;
             
+            private global::System.Data.DataColumn columndatum;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public AnnonsDataTable() {
@@ -458,6 +460,14 @@ namespace ThriftShop {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn datumColumn {
+                get {
+                    return this.columndatum;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -493,7 +503,7 @@ namespace ThriftShop {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AnnonsRow AddAnnonsRow(string titel, string beskrivning, double pris, KategoriRow parentKategoriRowByFK_Annons_Kategori, AnvandareRow parentAnvandareRowByFK_Annons_Anvandare) {
+            public AnnonsRow AddAnnonsRow(string titel, string beskrivning, double pris, KategoriRow parentKategoriRowByFK_Annons_Kategori, AnvandareRow parentAnvandareRowByFK_Annons_Anvandare, System.DateTime datum) {
                 AnnonsRow rowAnnonsRow = ((AnnonsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -501,7 +511,8 @@ namespace ThriftShop {
                         beskrivning,
                         pris,
                         null,
-                        null};
+                        null,
+                        datum};
                 if ((parentKategoriRowByFK_Annons_Kategori != null)) {
                     columnValuesArray[4] = parentKategoriRowByFK_Annons_Kategori[0];
                 }
@@ -543,6 +554,7 @@ namespace ThriftShop {
                 this.columnpris = base.Columns["pris"];
                 this.columnkategoriID = base.Columns["kategoriID"];
                 this.columnanvandareID = base.Columns["anvandareID"];
+                this.columndatum = base.Columns["datum"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -560,6 +572,8 @@ namespace ThriftShop {
                 base.Columns.Add(this.columnkategoriID);
                 this.columnanvandareID = new global::System.Data.DataColumn("anvandareID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnanvandareID);
+                this.columndatum = new global::System.Data.DataColumn("datum", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndatum);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AutoIncrement = true;
@@ -1374,6 +1388,22 @@ namespace ThriftShop {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public System.DateTime datum {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableAnnons.datumColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'datum\' in table \'Annons\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAnnons.datumColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public AnvandareRow AnvandareRow {
                 get {
                     return ((AnvandareRow)(this.GetParentRow(this.Table.ParentRelations["FK_Annons_Anvandare"])));
@@ -1404,6 +1434,18 @@ namespace ThriftShop {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetbeskrivningNull() {
                 this[this.tableAnnons.beskrivningColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsdatumNull() {
+                return this.IsNull(this.tableAnnons.datumColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetdatumNull() {
+                this[this.tableAnnons.datumColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1775,10 +1817,11 @@ namespace ThriftShop.LeventsDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("pris", "pris");
             tableMapping.ColumnMappings.Add("kategoriID", "kategoriID");
             tableMapping.ColumnMappings.Add("anvandareID", "anvandareID");
+            tableMapping.ColumnMappings.Add("datum", "datum");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Annons] WHERE (([id] = @Original_id) AND ([titel] = @Original_titel) AND ((@IsNull_beskrivning = 1 AND [beskrivning] IS NULL) OR ([beskrivning] = @Original_beskrivning)) AND ([pris] = @Original_pris) AND ([kategoriID] = @Original_kategoriID) AND ([anvandareID] = @Original_anvandareID))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Annons] WHERE (([id] = @Original_id) AND ([titel] = @Original_titel) AND ((@IsNull_beskrivning = 1 AND [beskrivning] IS NULL) OR ([beskrivning] = @Original_beskrivning)) AND ([pris] = @Original_pris) AND ([kategoriID] = @Original_kategoriID) AND ([anvandareID] = @Original_anvandareID) AND ((@IsNull_datum = 1 AND [datum] IS NULL) OR ([datum] = @Original_datum)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_titel", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titel", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1787,26 +1830,30 @@ namespace ThriftShop.LeventsDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pris", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pris", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_kategoriID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kategoriID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_anvandareID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "anvandareID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_datum", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "datum", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "datum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Annons] ([titel], [beskrivning], [pris], [kategoriID], [anvandareID]) VALUES (@titel, @beskrivning, @pris, @kategoriID, @anvandareID);
-SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Annons] ([titel], [beskrivning], [pris], [kategoriID], [anvandareID], [datum]) VALUES (@titel, @beskrivning, @pris, @kategoriID, @anvandareID, @datum);
+SELECT id, titel, beskrivning, pris, kategoriID, anvandareID, datum FROM Annons WHERE (id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@titel", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titel", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beskrivning", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "beskrivning", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pris", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pris", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kategoriID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kategoriID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@anvandareID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "anvandareID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "datum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Annons] SET [titel] = @titel, [beskrivning] = @beskrivning, [pris] = @pris, [kategoriID] = @kategoriID, [anvandareID] = @anvandareID WHERE (([id] = @Original_id) AND ([titel] = @Original_titel) AND ((@IsNull_beskrivning = 1 AND [beskrivning] IS NULL) OR ([beskrivning] = @Original_beskrivning)) AND ([pris] = @Original_pris) AND ([kategoriID] = @Original_kategoriID) AND ([anvandareID] = @Original_anvandareID));
-SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (id = @id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Annons] SET [titel] = @titel, [beskrivning] = @beskrivning, [pris] = @pris, [kategoriID] = @kategoriID, [anvandareID] = @anvandareID, [datum] = @datum WHERE (([id] = @Original_id) AND ([titel] = @Original_titel) AND ((@IsNull_beskrivning = 1 AND [beskrivning] IS NULL) OR ([beskrivning] = @Original_beskrivning)) AND ([pris] = @Original_pris) AND ([kategoriID] = @Original_kategoriID) AND ([anvandareID] = @Original_anvandareID) AND ((@IsNull_datum = 1 AND [datum] IS NULL) OR ([datum] = @Original_datum)));
+SELECT id, titel, beskrivning, pris, kategoriID, anvandareID, datum FROM Annons WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@titel", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titel", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@beskrivning", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "beskrivning", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pris", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pris", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kategoriID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kategoriID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@anvandareID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "anvandareID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "datum", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_titel", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titel", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_beskrivning", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "beskrivning", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -1814,6 +1861,8 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pris", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pris", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_kategoriID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kategoriID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_anvandareID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "anvandareID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_datum", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "datum", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_datum", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "datum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -1830,7 +1879,7 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM dbo.Annons";
+            this._commandCollection[0].CommandText = "SELECT id, titel, beskrivning, pris, kategoriID, anvandareID, datum FROM Annons";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1891,7 +1940,7 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id, string Original_titel, string Original_beskrivning, double Original_pris, int Original_kategoriID, int Original_anvandareID) {
+        public virtual int Delete(int Original_id, string Original_titel, string Original_beskrivning, double Original_pris, int Original_kategoriID, int Original_anvandareID, global::System.Nullable<global::System.DateTime> Original_datum) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
             if ((Original_titel == null)) {
                 throw new global::System.ArgumentNullException("Original_titel");
@@ -1910,6 +1959,14 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
             this.Adapter.DeleteCommand.Parameters[4].Value = ((double)(Original_pris));
             this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_kategoriID));
             this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_anvandareID));
+            if ((Original_datum.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_datum.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1930,7 +1987,7 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string titel, string beskrivning, double pris, int kategoriID, int anvandareID) {
+        public virtual int Insert(string titel, string beskrivning, double pris, int kategoriID, int anvandareID, global::System.Nullable<global::System.DateTime> datum) {
             if ((titel == null)) {
                 throw new global::System.ArgumentNullException("titel");
             }
@@ -1946,6 +2003,12 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
             this.Adapter.InsertCommand.Parameters[2].Value = ((double)(pris));
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(kategoriID));
             this.Adapter.InsertCommand.Parameters[4].Value = ((int)(anvandareID));
+            if ((datum.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(datum.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1966,7 +2029,7 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string titel, string beskrivning, double pris, int kategoriID, int anvandareID, int Original_id, string Original_titel, string Original_beskrivning, double Original_pris, int Original_kategoriID, int Original_anvandareID, int id) {
+        public virtual int Update(string titel, string beskrivning, double pris, int kategoriID, int anvandareID, global::System.Nullable<global::System.DateTime> datum, int Original_id, string Original_titel, string Original_beskrivning, double Original_pris, int Original_kategoriID, int Original_anvandareID, global::System.Nullable<global::System.DateTime> Original_datum, int id) {
             if ((titel == null)) {
                 throw new global::System.ArgumentNullException("titel");
             }
@@ -1982,25 +2045,39 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
             this.Adapter.UpdateCommand.Parameters[2].Value = ((double)(pris));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(kategoriID));
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(anvandareID));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_id));
+            if ((datum.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(datum.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_id));
             if ((Original_titel == null)) {
                 throw new global::System.ArgumentNullException("Original_titel");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_titel));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_titel));
             }
             if ((Original_beskrivning == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_beskrivning));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_beskrivning));
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(Original_pris));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_kategoriID));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_anvandareID));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(id));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(Original_pris));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_kategoriID));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_anvandareID));
+            if ((Original_datum.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_datum.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2021,8 +2098,8 @@ SELECT id, titel, beskrivning, pris, kategoriID, anvandareID FROM Annons WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string titel, string beskrivning, double pris, int kategoriID, int anvandareID, int Original_id, string Original_titel, string Original_beskrivning, double Original_pris, int Original_kategoriID, int Original_anvandareID) {
-            return this.Update(titel, beskrivning, pris, kategoriID, anvandareID, Original_id, Original_titel, Original_beskrivning, Original_pris, Original_kategoriID, Original_anvandareID, Original_id);
+        public virtual int Update(string titel, string beskrivning, double pris, int kategoriID, int anvandareID, global::System.Nullable<global::System.DateTime> datum, int Original_id, string Original_titel, string Original_beskrivning, double Original_pris, int Original_kategoriID, int Original_anvandareID, global::System.Nullable<global::System.DateTime> Original_datum) {
+            return this.Update(titel, beskrivning, pris, kategoriID, anvandareID, datum, Original_id, Original_titel, Original_beskrivning, Original_pris, Original_kategoriID, Original_anvandareID, Original_datum, Original_id);
         }
     }
     
@@ -2723,6 +2800,71 @@ SELECT id, anvandarnamn, losenord, email FROM Anvandare WHERE (id = @id)";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string namn, int Original_id, string Original_namn) {
             return this.Update(namn, Original_id, Original_namn, Original_id);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class QueriesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.IDbCommand[] _commandCollection;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        protected global::System.Data.IDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.IDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Connection = new global::System.Data.SqlClient.SqlConnection(global::ThriftShop.Properties.Settings.Default.LeventsDBConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandText = "dbo.DeleteAnnons";
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandType = global::System.Data.CommandType.StoredProcedure;
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@annonsID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int DeleteAnnons(global::System.Nullable<int> annonsID) {
+            global::System.Data.SqlClient.SqlCommand command = ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[0]));
+            if ((annonsID.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(annonsID.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

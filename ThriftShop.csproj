@@ -198,6 +198,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -240,6 +242,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ad.cs" />
+    <Compile Include="Annons.cs">
+      <DependentUpon>AnnonsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnnonsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnonsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnnonsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnonsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnnonsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnonsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Anvandare.cs">
+      <DependentUpon>AnnonsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseMethods.cs" />
     <Compile Include="FormAd.cs">
       <SubType>Form</SubType>
@@ -253,6 +276,9 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kategori.cs">
+      <DependentUpon>AnnonsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LeventsDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -260,6 +286,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>AnnonsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <EmbeddedResource Include="FormAd.resx">
       <DependentUpon>FormAd.cs</DependentUpon>
@@ -276,6 +305,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EntityDeploy Include="AnnonsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AnnonsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AnnonsModel.edmx.diagram">
+      <DependentUpon>AnnonsModel.edmx</DependentUpon>
+    </None>
+    <None Include="App.Config" />
     <None Include="LeventsDBDataSet.xsc">
       <DependentUpon>LeventsDBDataSet.xsd</DependentUpon>
     </None>
@@ -299,7 +336,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AnnonsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AnnonsModel.edmx</DependentUpon>
+      <LastGenOutput>AnnonsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AnnonsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AnnonsModel.edmx</DependentUpon>
+      <LastGenOutput>AnnonsModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
