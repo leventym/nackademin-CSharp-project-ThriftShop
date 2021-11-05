@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace ThriftShop
@@ -35,6 +33,7 @@ namespace ThriftShop
             dataGridView1.DataSource = this.dt;
         }
 
+
         //Placerar panelStart i förgrunden
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -49,30 +48,35 @@ namespace ThriftShop
 
         }
 
+        
         //Placerar panelLogin i förgrunden
         private void buttonLogin_Click_1(object sender, EventArgs e)
         {
             panelLogin.BringToFront();
         }
 
+        
         //Placerar panelStart i förgrunden
         private void buttonBack_Click(object sender, EventArgs e)
         {
             panelStart.BringToFront();
         }
 
+        
         //Placerar panelCreateNewAccount i förgrunden
         private void buttonNewAccount_Click(object sender, EventArgs e)
         {
             panelCreateNewAccount.BringToFront();
         }
 
+        
         //Placerar panelCreateNewAccount i förgrunden
         private void buttonNewAccount_Click_1(object sender, EventArgs e)
         {
             panelCreateNewAccount.BringToFront();
         }
 
+        
         //Kollar om användaren är inloggad & Placerar panelLogin i förgrunden
         private void buttonCreateAccount_Click(object sender, EventArgs e)
         {
@@ -84,6 +88,7 @@ namespace ThriftShop
             }
         }
 
+        
         //Kollar om användaren är inloggad & Placerar panelLogin i förgrunden
         //Visar och döljer knappar.
         private void buttonLoginLogin_Click(object sender, EventArgs e)
@@ -100,6 +105,7 @@ namespace ThriftShop
             }
         }
 
+        
         //Om inloggad och knappen skapa ny annons klockas initieras FormAd
         private void buttonAddAd_Click(object sender, EventArgs e)
         {
@@ -111,6 +117,7 @@ namespace ThriftShop
             }
         }
 
+        
         //Om logga ut knappen klickas döljs och visas knappar och sttaus för inloggad blir false.
         //Panelen panelStart placeras i förgrunden.
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -126,12 +133,14 @@ namespace ThriftShop
             textBoxPassword.Text = "";
         }
 
+        
         //Placerar panelLogin i förgrunden
         private void buttonBackCreateNewAccount_Click(object sender, EventArgs e)
         {
             panelLogin.BringToFront();
         }
 
+        
         //Metod för att redigera annons. Bara inloggad användare kan rediegra sin annons. Medan man redigerar kan man även radera.
         private void buttonEditAd_Click(object sender, EventArgs e)
         {
@@ -158,13 +167,16 @@ namespace ThriftShop
             }
         }
 
-        //
+
+        //Läser in input från textfält och utför sökning när man klicka på sök-knappen.
         private void buttonSearch_Click_1(object sender, EventArgs e)
         {
             dt.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%' AND [{2}] LIKE '%{3}%'", "Titel", textBoxSearchTitle.Text,
                 "Kategori", textBoxSearchCategory.Text);
         }
 
+        
+        //Rensar sökfälten
         private void buttonClear_Click(object sender, EventArgs e)
         {
             textBoxSearchTitle.Text = "";
@@ -173,7 +185,8 @@ namespace ThriftShop
                 "Kategori", textBoxSearchCategory.Text);
         }
 
-        //när man dubbelklickar på beskrivning så dyker ny ruta upp
+        
+        //När man dubbelklickar på beskrivning så dyker ny ruta upp
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridView1.SelectedRows[0];

@@ -16,6 +16,7 @@ namespace ThriftShop
         public static int userID { get; set;}
         public static string userName { get; set; }
 
+        //Konstruktorn initierar DB-koppling
         public User()
         {
             conn = new SqlConnection(_sqlConnectinStr); //Initera kopplingen med angivna connectionsträngen

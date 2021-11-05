@@ -22,6 +22,7 @@ namespace ThriftShop
         }
 
 
+        
         //funktion som hämtar alla tillgängliga kategorier från DB-tabellen
         public List<string> GetCategories()
         {
@@ -65,6 +66,7 @@ namespace ThriftShop
             return listCategories;
         }
 
+        
         //Funktion som skapar annons
         public void CreateAd(Ad newAd)
         {
@@ -88,6 +90,7 @@ namespace ThriftShop
             }
         }
 
+       
         //Metod som hämtar samtliga annonser i tabellen
         public DataTable getAllAds()
         {
@@ -134,6 +137,7 @@ namespace ThriftShop
             return table;
         }
 
+        
         //Uppdaterar existerande annons
         public void updateAd(Ad newAd)
         {
@@ -161,6 +165,7 @@ namespace ThriftShop
             }
         }
 
+        
         //Metod för att radera annons med Entity Framework
         public void deleteAd(int annonsID)
         {
