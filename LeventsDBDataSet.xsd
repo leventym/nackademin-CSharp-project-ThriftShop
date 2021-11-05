@@ -209,7 +209,7 @@ SELECT id, namn FROM Kategori WHERE (id = @id)</CommandText>
   <xs:element name="LeventsDBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="LeventsDBDataSet" msprop:Generator_UserDSName="LeventsDBDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Annons" msprop:Generator_TableClassName="AnnonsDataTable" msprop:Generator_TableVarName="tableAnnons" msprop:Generator_RowChangedName="AnnonsRowChanged" msprop:Generator_TablePropName="Annons" msprop:Generator_RowDeletingName="AnnonsRowDeleting" msprop:Generator_RowChangingName="AnnonsRowChanging" msprop:Generator_RowEvHandlerName="AnnonsRowChangeEventHandler" msprop:Generator_RowDeletedName="AnnonsRowDeleted" msprop:Generator_RowClassName="AnnonsRow" msprop:Generator_UserTableName="Annons" msprop:Generator_RowEvArgName="AnnonsRowChangeEvent">
+        <xs:element name="Annons" msprop:Generator_TableClassName="AnnonsDataTable" msprop:Generator_TableVarName="tableAnnons" msprop:Generator_TablePropName="Annons" msprop:Generator_RowDeletingName="AnnonsRowDeleting" msprop:Generator_RowChangingName="AnnonsRowChanging" msprop:Generator_RowEvHandlerName="AnnonsRowChangeEventHandler" msprop:Generator_RowDeletedName="AnnonsRowDeleted" msprop:Generator_UserTableName="Annons" msprop:Generator_RowChangedName="AnnonsRowChanged" msprop:Generator_RowEvArgName="AnnonsRowChangeEvent" msprop:Generator_RowClassName="AnnonsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -223,7 +223,7 @@ SELECT id, namn FROM Kategori WHERE (id = @id)</CommandText>
               <xs:element name="beskrivning" msprop:Generator_ColumnVarNameInTable="columnbeskrivning" msprop:Generator_ColumnPropNameInRow="beskrivning" msprop:Generator_ColumnPropNameInTable="beskrivningColumn" msprop:Generator_UserColumnName="beskrivning" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
+                    <xs:maxLength value="8000" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -234,7 +234,7 @@ SELECT id, namn FROM Kategori WHERE (id = @id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Anvandare" msprop:Generator_TableClassName="AnvandareDataTable" msprop:Generator_TableVarName="tableAnvandare" msprop:Generator_RowChangedName="AnvandareRowChanged" msprop:Generator_TablePropName="Anvandare" msprop:Generator_RowDeletingName="AnvandareRowDeleting" msprop:Generator_RowChangingName="AnvandareRowChanging" msprop:Generator_RowEvHandlerName="AnvandareRowChangeEventHandler" msprop:Generator_RowDeletedName="AnvandareRowDeleted" msprop:Generator_RowClassName="AnvandareRow" msprop:Generator_UserTableName="Anvandare" msprop:Generator_RowEvArgName="AnvandareRowChangeEvent">
+        <xs:element name="Anvandare" msprop:Generator_TableClassName="AnvandareDataTable" msprop:Generator_TableVarName="tableAnvandare" msprop:Generator_TablePropName="Anvandare" msprop:Generator_RowDeletingName="AnvandareRowDeleting" msprop:Generator_RowChangingName="AnvandareRowChanging" msprop:Generator_RowEvHandlerName="AnvandareRowChangeEventHandler" msprop:Generator_RowDeletedName="AnvandareRowDeleted" msprop:Generator_UserTableName="Anvandare" msprop:Generator_RowChangedName="AnvandareRowChanged" msprop:Generator_RowEvArgName="AnvandareRowChangeEvent" msprop:Generator_RowClassName="AnvandareRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -262,7 +262,7 @@ SELECT id, namn FROM Kategori WHERE (id = @id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Kategori" msprop:Generator_TableClassName="KategoriDataTable" msprop:Generator_TableVarName="tableKategori" msprop:Generator_RowChangedName="KategoriRowChanged" msprop:Generator_TablePropName="Kategori" msprop:Generator_RowDeletingName="KategoriRowDeleting" msprop:Generator_RowChangingName="KategoriRowChanging" msprop:Generator_RowEvHandlerName="KategoriRowChangeEventHandler" msprop:Generator_RowDeletedName="KategoriRowDeleted" msprop:Generator_RowClassName="KategoriRow" msprop:Generator_UserTableName="Kategori" msprop:Generator_RowEvArgName="KategoriRowChangeEvent">
+        <xs:element name="Kategori" msprop:Generator_TableClassName="KategoriDataTable" msprop:Generator_TableVarName="tableKategori" msprop:Generator_TablePropName="Kategori" msprop:Generator_RowDeletingName="KategoriRowDeleting" msprop:Generator_RowChangingName="KategoriRowChanging" msprop:Generator_RowEvHandlerName="KategoriRowChangeEventHandler" msprop:Generator_RowDeletedName="KategoriRowDeleted" msprop:Generator_UserTableName="Kategori" msprop:Generator_RowChangedName="KategoriRowChanged" msprop:Generator_RowEvArgName="KategoriRowChangeEvent" msprop:Generator_RowClassName="KategoriRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -293,8 +293,8 @@ SELECT id, namn FROM Kategori WHERE (id = @id)</CommandText>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_Annons_Anvandare" msdata:parent="Anvandare" msdata:child="Annons" msdata:parentkey="id" msdata:childkey="anvandareID" msprop:Generator_UserChildTable="Annons" msprop:Generator_ChildPropName="GetAnnonsRows" msprop:Generator_UserRelationName="FK_Annons_Anvandare" msprop:Generator_ParentPropName="AnvandareRow" msprop:Generator_RelationVarName="relationFK_Annons_Anvandare" msprop:Generator_UserParentTable="Anvandare" />
-      <msdata:Relationship name="FK_Annons_Kategori" msdata:parent="Kategori" msdata:child="Annons" msdata:parentkey="id" msdata:childkey="kategoriID" msprop:Generator_UserChildTable="Annons" msprop:Generator_ChildPropName="GetAnnonsRows" msprop:Generator_UserRelationName="FK_Annons_Kategori" msprop:Generator_ParentPropName="KategoriRow" msprop:Generator_RelationVarName="relationFK_Annons_Kategori" msprop:Generator_UserParentTable="Kategori" />
+      <msdata:Relationship name="FK_Annons_Anvandare" msdata:parent="Anvandare" msdata:child="Annons" msdata:parentkey="id" msdata:childkey="anvandareID" msprop:Generator_UserChildTable="Annons" msprop:Generator_ChildPropName="GetAnnonsRows" msprop:Generator_UserRelationName="FK_Annons_Anvandare" msprop:Generator_RelationVarName="relationFK_Annons_Anvandare" msprop:Generator_UserParentTable="Anvandare" msprop:Generator_ParentPropName="AnvandareRow" />
+      <msdata:Relationship name="FK_Annons_Kategori" msdata:parent="Kategori" msdata:child="Annons" msdata:parentkey="id" msdata:childkey="kategoriID" msprop:Generator_UserChildTable="Annons" msprop:Generator_ChildPropName="GetAnnonsRows" msprop:Generator_UserRelationName="FK_Annons_Kategori" msprop:Generator_RelationVarName="relationFK_Annons_Kategori" msprop:Generator_UserParentTable="Kategori" msprop:Generator_ParentPropName="KategoriRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

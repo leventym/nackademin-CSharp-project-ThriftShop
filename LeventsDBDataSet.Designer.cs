@@ -584,7 +584,7 @@ namespace ThriftShop {
                 this.columnid.Unique = true;
                 this.columntitel.AllowDBNull = false;
                 this.columntitel.MaxLength = 50;
-                this.columnbeskrivning.MaxLength = 100;
+                this.columnbeskrivning.MaxLength = 8000;
                 this.columnpris.AllowDBNull = false;
                 this.columnkategoriID.AllowDBNull = false;
                 this.columnanvandareID.AllowDBNull = false;

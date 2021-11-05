@@ -1,18 +1,31 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace ThriftShop
 {
+    
     class User
     {
+        public string _sqlConnectinStr = ConfigurationManager.ConnectionStrings["ThriftShop.Properties.Settings.LeventsDBConnectionString"].ConnectionString; //Connection till Databasen
+        SqlConnection conn; //Variabel för kopplingen
+
+        //Medlemsvariabler
         public static int userID { get; set;}
         public static string userName { get; set; }
 
-        //Metod för att skapa konto med antal kontroller.
-        public static bool createAccount(string userName, string password, string email, SqlConnection conn)
+        public User()
         {
+            conn = new SqlConnection(_sqlConnectinStr); //Initera kopplingen med angivna connectionsträngen
+        }
+
+        
+        //Metod för att skapa konto med antal kontroller och input variabler.
+        public bool createAccount(string userName, string password, string email)
+        {
+            //Kollar om input variablerna är tomma
             if (userName == "" || password == "")
             {
                 MessageBox.Show("Användarnamn eller lösenord saknas. Ange användarnamn och lösenord!");
@@ -30,6 +43,7 @@ namespace ThriftShop
                     {
                         conn.Open();
                     }
+                    
                     DataTable table = new DataTable();
                     SqlDataAdapter adapter = new SqlDataAdapter(cmdSelect);
                     adapter.Fill(table);
@@ -39,23 +53,12 @@ namespace ThriftShop
                         MessageBox.Show("Användare finns redan");
                         return false;
                     }
-                    /*
-                    foreach(DataRow row in table.Rows)
-                    {
-                        foreach(var element in row.ItemArray)
-                        {
-                            MessageBox.Show(element.ToString());
-                        }
-                    }
-                    */
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                     return false;
                 }
-
-
             }
 
 
@@ -77,12 +80,11 @@ namespace ThriftShop
                 }
             }
             return true;
-
         }
 
         
-        //Loggar in till konto. Kollar om fälten är tomma, om inte hämtas användaren från db.
-        public static bool loginToAccount(string userName, string password, SqlConnection conn)
+        //Loggar in till konto. Kollar om fälten är tomma, om inte, hämtas användaren från db.
+        public bool loginToAccount(string userName, string password)
         {
             if (userName == "" || password == "")
             {
@@ -90,6 +92,7 @@ namespace ThriftShop
                 return false;
             }
 
+            //SQL kommando för att hämta användaruppgifter som skrivits in
             using (SqlCommand cmdSelect = new SqlCommand("SELECT id,anvandarnamn FROM ANVANDARE where anvandarnamn='" + userName + "' AND losenord='" + password + "'", conn)) //Ange SQL kommando som ska skickas till db
             {
                 try

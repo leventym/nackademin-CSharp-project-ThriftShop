@@ -5,23 +5,27 @@ namespace ThriftShop
 {
     public partial class FormAd : Form
     {
+        //Medlemsvariabler
         //Anger FormAds parent
         public FormMain parent { set; get; }
         public int adId{ set; get; }
 
+        //Initierar DatabaseMethods klassen
         private DatabaseMethods db = new DatabaseMethods();
         public FormAd()
         {
             InitializeComponent();
+            //Hämtar alla kategorier
             var result = db.GetCategories();
             
-            // Lägg in result in combobox
+            // Lägg in result i i en combobox
             comboBoxCategory.DataSource = result;
             comboBoxCategoryEdit.DataSource = result;
             panelNewAd.BringToFront();
         }
 
         //Funktion för att redigera eller radera annons
+        //Kallas från FormMain.cs, därför public
         public void EditAd(Ad ad)
         {
             panelEditAd.BringToFront();
@@ -32,21 +36,28 @@ namespace ThriftShop
             this.adId = ad.adID;
         }
 
+        //Funktion för att radera annons
         private void buttonDeleteEdit_Click(object sender, EventArgs e)
         {
             this.db.deleteAd(adId);
             parent.refreshTable();
             this.Close();
         }
+        
+        //Funktion för att avbryta
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //Funktion för att spara annons
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            //Initierar ny Ad
             Ad newAd = new Ad();
             newAd.userID = User.userID;
+            
+            //Hämtar kategoriID från dictionry
             newAd.categoryID = db.categoryDict[comboBoxCategory.Text];
             newAd.description = textBoxDescription.Text;
             newAd.title = textBoxTitle.Text;
@@ -84,6 +95,7 @@ namespace ThriftShop
             this.Close();
         }
 
+        //Som save + en update
         private void buttonSaveEdit_Click(object sender, EventArgs e)
         {
             Ad editAd = new Ad();
@@ -104,6 +116,7 @@ namespace ThriftShop
             if (editAd.isValid())
             {
                 // Kalla db.createAd(newAd)
+                //Utför en update
                 db.updateAd(editAd);
                 parent.refreshTable();
                 this.Close();

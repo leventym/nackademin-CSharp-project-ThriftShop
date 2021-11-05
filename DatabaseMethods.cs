@@ -9,8 +9,11 @@ namespace ThriftShop
 {
     class DatabaseMethods
     {
+        //Ansluter till DB
         private string _sqlConnectinStr = ConfigurationManager.ConnectionStrings["ThriftShop.Properties.Settings.LeventsDBConnectionString"].ConnectionString; //Connection till Databasen
         private SqlConnection conn;
+        
+        //En dictionary som innehåller nyckel, som är ett namn. Används när man hämtar kategoriID.
         public Dictionary<string, int> categoryDict = new Dictionary<string, int>();
         
         public DatabaseMethods()
@@ -19,11 +22,13 @@ namespace ThriftShop
         }
 
 
-        //funktion som hämtar alla tillgängliga kategorier från db tabellen
+        //funktion som hämtar alla tillgängliga kategorier från DB-tabellen
         public List<string> GetCategories()
         {
+            //Initierar lista.
             List<string> listCategories = new List<string>();
 
+            //Skickar SQL kommando för att hämta alla kategorier.
             using (SqlCommand cmdSelect = new SqlCommand("SELECT id,namn FROM Kategori", conn)) //Ange SQL kommando som ska skickas till db
             {
                 try
@@ -33,16 +38,18 @@ namespace ThriftShop
                     {
                         conn.Open();
                     }
+                    //Skapar ny data tabell som sedan fylls med svaret från DB-tabellen
                     DataTable table = new DataTable();
                     SqlDataAdapter adapter = new SqlDataAdapter(cmdSelect);
                     adapter.Fill(table);
 
+                   //Itirerar igenom tabllenn
                     foreach (DataRow row in table.Rows)
                     {
                         var id = (int)row.ItemArray[0];
                         var category = row.ItemArray[1].ToString();
 
-
+                        //Lägger till innehållet i tabellen till dictionary OCH listan.
                         categoryDict.Add(category, id);
                         listCategories.Add(row.ItemArray[1].ToString());
 
@@ -58,8 +65,10 @@ namespace ThriftShop
             return listCategories;
         }
 
+        //Funktion som skapar annons
         public void CreateAd(Ad newAd)
         {
+            //Skickar SQL kommando
             using (SqlCommand cmdInsert = new SqlCommand("INSERT INTO Annons (titel, beskrivning, pris, kategoriID, anvandareID) VALUES ('" + newAd.title + "','" + newAd.description + "','" + newAd.price + "','" + newAd.categoryID + "','" + newAd.userID + "')", conn))
             {
                 try
@@ -68,8 +77,8 @@ namespace ThriftShop
                     {
                         conn.Open();
                     }
-                    int value = cmdInsert.ExecuteNonQuery();
-                    MessageBox.Show(value.ToString());
+                    //Skickar SQL kommandot
+                    cmdInsert.ExecuteNonQuery();
 
                 }
                 catch (Exception e)
@@ -79,9 +88,12 @@ namespace ThriftShop
             }
         }
 
+        //Metod som hämtar samtliga annonser i tabellen
         public DataTable getAllAds()
         {
+            //Skspar ny tabell
             DataTable table = new DataTable();
+            
             // Använd select för att hämta alla annonser (alla kolumner)
             using (SqlCommand cmdSelect = new SqlCommand("SELECT Annons.id, titel AS Titel, beskrivning AS Beskrivning, pris AS Pris, Kategori.namn AS Kategori, Annons.Datum AS Datum, Anvandare.anvandarnamn AS Säljare " +
                                                             "FROM Annons " +
@@ -122,6 +134,7 @@ namespace ThriftShop
             return table;
         }
 
+        //Uppdaterar existerande annons
         public void updateAd(Ad newAd)
         {
             

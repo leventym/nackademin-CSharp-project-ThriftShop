@@ -8,22 +8,22 @@ namespace ThriftShop
 {
     public partial class FormMain : Form
     {
-        public string _sqlConnectinStr = ConfigurationManager.ConnectionStrings["ThriftShop.Properties.Settings.LeventsDBConnectionString"].ConnectionString; //Connection till Databasen
-        SqlConnection conn; //Variabel för kopplingen
-        FormAd AdForm;
-
-        DatabaseMethods dm;
-        DataTable dt;
-
+        //Definierar medlemsvariabler
+        private User user;
+        private FormAd AdForm;
+        private DatabaseMethods dm;
+        private DataTable dt;
         private bool loggedIn = false;
         
         public FormMain()
         {
-            
-            conn = new SqlConnection(_sqlConnectinStr); //Initera kopplingen med angivna connectionsträngen
             InitializeComponent();
 
+            //Skapar objekt
             dm = new DatabaseMethods();
+            user = new User();
+            
+            //tilldelar funktionen getallads till dt OCH visar innehållet i datagridview
             this.dt = dm.getAllAds();
             dataGridView1.DataSource = this.dt;
 
@@ -31,14 +31,17 @@ namespace ThriftShop
 
         public void refreshTable()
         {
-            dataGridView1.DataSource = dm.getAllAds();
+            this.dt = dm.getAllAds();
+            dataGridView1.DataSource = this.dt;
         }
 
         //Placerar panelStart i förgrunden
         private void FormMain_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'leventsDBDataSet.Annons' table. You can move, or remove it, as needed.
-            this.annonsTableAdapter.Fill(this.leventsDBDataSet.Annons);
+            //this.annonsTableAdapter.Fill(this.leventsDBDataSet.Annons);
+            
+            
             panelStart.BringToFront();
             this.dataGridView1.Columns["id"].Visible = false;
 
@@ -73,7 +76,7 @@ namespace ThriftShop
         //Kollar om användaren är inloggad & Placerar panelLogin i förgrunden
         private void buttonCreateAccount_Click(object sender, EventArgs e)
         {
-            bool accountCreated = User.createAccount(textBoxNewUsername.Text, textBoxNewPassword.Text, textBoxNewEmail.Text, conn);
+            bool accountCreated = user.createAccount(textBoxNewUsername.Text, textBoxNewPassword.Text, textBoxNewEmail.Text);
             if (accountCreated)
             {
                 MessageBox.Show("Kontot skapat");
@@ -85,7 +88,7 @@ namespace ThriftShop
         //Visar och döljer knappar.
         private void buttonLoginLogin_Click(object sender, EventArgs e)
         {
-            loggedIn = User.loginToAccount(textBoxUserName.Text, textBoxPassword.Text, conn);
+            loggedIn = user.loginToAccount(textBoxUserName.Text, textBoxPassword.Text);
             if (loggedIn == true)
             {
                 MessageBox.Show("Inloggad!");
@@ -139,10 +142,10 @@ namespace ThriftShop
             if(annonsSkapare == User.userName)
             {
                 editAd.adID = (int)row.Cells["id"].Value;
-                editAd.title = row.Cells["titel"].Value.ToString();
-                editAd.description = row.Cells["beskrivning"].Value.ToString();
-                editAd.price = (double)row.Cells["pris"].Value;
-                editAd.categoryName = row.Cells["namn"].Value.ToString();
+                editAd.title = row.Cells["Titel"].Value.ToString();
+                editAd.description = row.Cells["Beskrivning"].Value.ToString();
+                editAd.price = (double)row.Cells["Pris"].Value;
+                editAd.categoryName = row.Cells["Säljare"].Value.ToString();
 
                 AdForm = new FormAd();
                 AdForm.parent = this;
@@ -155,12 +158,27 @@ namespace ThriftShop
             }
         }
 
-        private void textBoxSearchTitle_TextChanged(object sender, EventArgs e)
+        //
+        private void buttonSearch_Click_1(object sender, EventArgs e)
         {
-            string filterField = "Titel";
-            dataGridView1.DataSource = filterField;
-            dt.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", "Titel", "000");
+            dt.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%' AND [{2}] LIKE '%{3}%'", "Titel", textBoxSearchTitle.Text,
+                "Kategori", textBoxSearchCategory.Text);
+        }
 
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            textBoxSearchTitle.Text = "";
+            textBoxSearchCategory.Text = "";
+            dt.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%' AND [{2}] LIKE '%{3}%'", "Titel", textBoxSearchTitle.Text,
+                "Kategori", textBoxSearchCategory.Text);
+        }
+
+        //när man dubbelklickar på beskrivning så dyker ny ruta upp
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridView1.SelectedRows[0];
+            string content = row.Cells["Beskrivning"].Value.ToString();
+            MessageBox.Show("Beskrivning: " + content);
         }
     }
 }

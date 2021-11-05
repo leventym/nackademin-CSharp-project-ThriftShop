@@ -31,6 +31,8 @@ namespace ThriftShop
         {
             this.components = new System.ComponentModel.Container();
             this.panelStart = new System.Windows.Forms.Panel();
+            this.labelSearchCategory = new System.Windows.Forms.Label();
+            this.textBoxSearchCategory = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonEditAd = new System.Windows.Forms.Button();
@@ -61,8 +63,8 @@ namespace ThriftShop
             this.textBoxNewUsername = new System.Windows.Forms.TextBox();
             this.labelCreateNewAccount = new System.Windows.Forms.Label();
             this.annonsTableAdapter = new ThriftShop.LeventsDBDataSetTableAdapters.AnnonsTableAdapter();
-            this.labelSearchCategory = new System.Windows.Forms.Label();
-            this.textBoxSearchCategory = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.annonsBindingSource)).BeginInit();
@@ -77,6 +79,8 @@ namespace ThriftShop
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelStart.Controls.Add(this.buttonClear);
+            this.panelStart.Controls.Add(this.buttonSearch);
             this.panelStart.Controls.Add(this.labelSearchCategory);
             this.panelStart.Controls.Add(this.textBoxSearchCategory);
             this.panelStart.Controls.Add(this.dataGridView1);
@@ -92,18 +96,38 @@ namespace ThriftShop
             this.panelStart.Size = new System.Drawing.Size(845, 802);
             this.panelStart.TabIndex = 0;
             // 
+            // labelSearchCategory
+            // 
+            this.labelSearchCategory.AutoSize = true;
+            this.labelSearchCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSearchCategory.Location = new System.Drawing.Point(117, 140);
+            this.labelSearchCategory.Name = "labelSearchCategory";
+            this.labelSearchCategory.Size = new System.Drawing.Size(98, 20);
+            this.labelSearchCategory.TabIndex = 10;
+            this.labelSearchCategory.Text = "Sök kategori";
+            // 
+            // textBoxSearchCategory
+            // 
+            this.textBoxSearchCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSearchCategory.Location = new System.Drawing.Point(238, 140);
+            this.textBoxSearchCategory.Name = "textBoxSearchCategory";
+            this.textBoxSearchCategory.Size = new System.Drawing.Size(211, 20);
+            this.textBoxSearchCategory.TabIndex = 9;
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(121, 105);
+            this.dataGridView1.Location = new System.Drawing.Point(121, 184);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(651, 654);
+            this.dataGridView1.Size = new System.Drawing.Size(651, 575);
             this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonLogout
             // 
@@ -155,7 +179,7 @@ namespace ThriftShop
             // 
             this.labelSearchTitle.AutoSize = true;
             this.labelSearchTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearchTitle.Location = new System.Drawing.Point(45, 58);
+            this.labelSearchTitle.Location = new System.Drawing.Point(117, 94);
             this.labelSearchTitle.Name = "labelSearchTitle";
             this.labelSearchTitle.Size = new System.Drawing.Size(70, 20);
             this.labelSearchTitle.TabIndex = 2;
@@ -165,11 +189,10 @@ namespace ThriftShop
             // 
             this.textBoxSearchTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSearchTitle.Location = new System.Drawing.Point(121, 60);
+            this.textBoxSearchTitle.Location = new System.Drawing.Point(238, 94);
             this.textBoxSearchTitle.Name = "textBoxSearchTitle";
             this.textBoxSearchTitle.Size = new System.Drawing.Size(211, 20);
             this.textBoxSearchTitle.TabIndex = 1;
-            this.textBoxSearchTitle.TextChanged += new System.EventHandler(this.textBoxSearchTitle_TextChanged);
             // 
             // labelTitle
             // 
@@ -409,24 +432,25 @@ namespace ThriftShop
             // 
             this.annonsTableAdapter.ClearBeforeFill = true;
             // 
-            // labelSearchCategory
+            // buttonSearch
             // 
-            this.labelSearchCategory.AutoSize = true;
-            this.labelSearchCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSearchCategory.Location = new System.Drawing.Point(345, 58);
-            this.labelSearchCategory.Name = "labelSearchCategory";
-            this.labelSearchCategory.Size = new System.Drawing.Size(98, 20);
-            this.labelSearchCategory.TabIndex = 10;
-            this.labelSearchCategory.Text = "Sök kategori";
+            this.buttonSearch.Location = new System.Drawing.Point(467, 94);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 13;
+            this.buttonSearch.Text = "Sök";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click_1);
             // 
-            // textBoxSearchCategory
+            // buttonClear
             // 
-            this.textBoxSearchCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSearchCategory.Location = new System.Drawing.Point(450, 60);
-            this.textBoxSearchCategory.Name = "textBoxSearchCategory";
-            this.textBoxSearchCategory.Size = new System.Drawing.Size(211, 20);
-            this.textBoxSearchCategory.TabIndex = 9;
+            this.buttonClear.Location = new System.Drawing.Point(469, 137);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear.TabIndex = 14;
+            this.buttonClear.Text = "Rensa";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
             // FormMain
             // 
@@ -490,6 +514,8 @@ namespace ThriftShop
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelSearchCategory;
         private System.Windows.Forms.TextBox textBoxSearchCategory;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.Button buttonClear;
     }
 }
 
